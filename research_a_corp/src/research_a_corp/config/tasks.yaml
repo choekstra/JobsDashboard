@@ -1,0 +1,35 @@
+research_task:
+  description: >
+    Conduct thorough and up-to-date research on company {company}. Focus on:
+    1. Current company status and health
+    2. Historical company performance
+    3. Major challenges and opportunities
+    4. Recent news and events about employment trends and hiring practices with focus on offshore outsourcing and remote work and hiring American citizens.
+    5. Current hiring practices and employment trends with focus on offshore outsourcing and remote work and hiring American citizens.
+    6. Potential hiring and employment trends with focus on offshore outsourcing and remote work and hiring American citizens.
+    7. Future outlook and potential developments about employment with focus on offshore outsourcing and remote work and hiring American citizens.
+    IMPORTANT: your information MUST be up to date and relevant to now, {current_date}.
+    Make sure to organize your findings in a structured format with clear sections. 
+  expected_output: >
+    A comprehensive research document with well-organized sections covering
+    all the requested aspects of {company}. Include specific facts, figures,
+    and examples where relevant.
+  agent: researcher
+
+analysis_task:
+  description: >
+    Analyze the research findings and create a comprehensive report on {company}.
+    Your report should:
+    1. Review the context you got and expand each topic into a full section for a report.
+    2. Make sure the report is detailed and contains any and all relevant information.
+    3. Provide insightful analysis of trends and patterns about employment trends and hiring practices with focus on offshore outsourcing and remote work and hiring American citizens.
+    4. Offer an employment outlook for company. 
+  expected_output: >
+    A polished, professional report on {company} that presents the research
+    findings with added analysis and insights. The report should be well-structured.
+    A fully fledged report with the main topics, each with a full section of information.
+    Formatted as markdown without '```'
+  agent: analyst
+  context:
+    - research_task
+  output_file: output/report.md
