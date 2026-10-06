@@ -1,19 +1,19 @@
 research_task:
   description: >
     Conduct thorough and up-to-date research on company {company}. Focus on:
-    1. Current company status and health
-    2. Historical company performance
-    3. Major challenges and opportunities
-    4. Recent news and events about employment trends and hiring practices with focus on offshore outsourcing and remote work and hiring American citizens.
-    5. Current hiring practices and employment trends with focus on offshore outsourcing and remote work and hiring American citizens.
-    6. Potential hiring and employment trends with focus on offshore outsourcing and remote work and hiring American citizens.
-    7. Future outlook and potential developments about employment with focus on offshore outsourcing and remote work and hiring American citizens.
+
+    1. Recent news and events about employment trends and hiring practices with focus on offshore outsourcing and remote work and hiring American citizens.
+    2. Current hiring practices and employment trends with focus on offshore outsourcing and remote work and hiring American citizens.
+    3. What is the breakdown of hiring employees who are us citizens, and citizen of other countries. 
+    4. Potential hiring and employment trends with focus on offshore outsourcing and remote work and hiring American citizens.
+    5. Future outlook and potential developments about employment with focus on offshore outsourcing and remote work and hiring American citizens.
     IMPORTANT: your information MUST be up to date and relevant to now, {current_date}.
     Make sure to organize your findings in a structured format with clear sections. 
+    If you don't know, don't respond.
   expected_output: >
-    A comprehensive research document with well-organized sections covering
-    all the requested aspects of {company}. Include specific facts, figures,
-    and examples where relevant.
+    A comprehensive research document with well-organized sections covering recent and future hiring trends of the company 
+    with the focus on the ease or difficulty of us citizens to find job openings at the company within the united states.
+    When analysis complete, include specific facts, figures, and examples where relevant.
   agent: researcher
 
 analysis_task:
@@ -33,3 +33,15 @@ analysis_task:
   context:
     - research_task
   output_file: output/report.md
+
+pick_best_company_for_employment:
+  description: >
+    Analyze the research findings and pick the best company for employment opportunites.
+    Send a push notification to the user with the decision and 1 sentence rationale.
+    Then respond with a detailed report on why you chose this company, and which companies were not selected.
+  expected_output: >
+    The chosen company and why it was chosen; the companies that were not selected and why they were not selected.
+  agent: forcaster
+  context:
+    - analysis_task
+  output_file: output/decision.md
