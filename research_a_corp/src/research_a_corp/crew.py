@@ -2,6 +2,7 @@ from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
 from crewai.agents.agent_builder.base_agent import BaseAgent
 from crewai_tools import SerperDevTool
+from .tools.push_tool import PushNotificationTool
 
 # If you want to run a snippet of code before or after the crew starts,
 # you can use the @before_kickoff and @after_kickoff decorators
@@ -11,8 +12,8 @@ from crewai_tools import SerperDevTool
 class ResearchACorp():
     """ResearchACorp crew"""
 
-    agents: list[BaseAgent]
-    tasks: list[Task]
+    agents_config = 'config/agents.yaml'
+    tasks_config = 'config/tasks.yaml'
 
     @agent
     def researcher(self) -> Agent:
@@ -26,7 +27,15 @@ class ResearchACorp():
     def analyst(self) -> Agent:
         return Agent(
             config=self.agents_config['analyst'],
-            verbose=True
+            verbose=True,
+            tools=[SerperDevTool()]
+        )
+
+    @agent
+    def forcaster(self) -> Agent:
+        return Agent(
+            config=self.agents_config['forcaster'],
+            tools=[PushNotificationTool()], memory=True
         )
 
     @task
@@ -42,6 +51,11 @@ class ResearchACorp():
             output_file='output/report.md'
         )
 
+    @task
+    def pick_best_company_for_employment(self) -> Task:
+        return Task(
+            config=self.tasks_config['pick_best_company_for_employment'],
+        )
 
     @crew
     def crew(self) -> Crew:
